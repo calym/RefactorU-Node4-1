@@ -5,7 +5,7 @@
 
 var express = require('express');
 var routes = require('./routes');
-var user = require('./routes/user');
+// var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 var fs = require('fs');
@@ -27,13 +27,21 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
- // app.get('/', routes.index);
- // app.get('/users', user.list);
+app.get('/', routes.index);
+app.get('/seville', routes.seville);
+app.get('/canaryislands', routes.canaryislands);
+app.get('/capeverde', routes.capeverde);
+app.get('/straitofmagellan', routes.straitofmagellan);
+app.get('/guam', routes.guam);
+app.get('/phillipines', routes.phillipines);
 
-// app.get('/hi', function(req, res){
-// 	console.log(req.query)
-// 	res.send('<h1>Hi!</h1>')
+// app.get('/seville', function(req, res){
+// 	res.redirect('/')
 // });	
+
+// app.post('/formsubmission', function(req, res){
+// 	res.redirect('/success')
+//  });
 
 // app.get('/numberone', function(req, res){
 // 	console.log(req.query)
@@ -51,26 +59,26 @@ if ('development' == app.get('env')) {
 // });	
 
 
-app.get('/', function(req,res) {
-	fs.readFile(__dirname + '/index.html',function(err,data) {
-	  	if (err) {
-	  		throw err;
-	  	}
-	  	console.log(data);
-	  	res.setHeader('Content-Type', 'text/html');
-	  	res.end(data);
-  	})
+// app.get('/', function(req,res) {
+// 	fs.readFile(__dirname + '/index.html',function(err,data) {
+// 	  	if (err) {
+// 	  		throw err;
+// 	  	}
+// 	  	console.log(data);
+// 	  	res.setHeader('Content-Type', 'text/html');
+// 	  	res.end(data);
+//   	})
 
-});
+// });
 
 
-app.post('/formsubmission', function(req, res){
-	res.redirect('/success')
-});
+// app.post('/formsubmission', function(req, res){
+// 	res.redirect('/success')
+// });
 
-app.get('/success', function(req, res){
-	res.send('<h1>Woo, forms rule!</h1>')
-});
+// app.get('/success', function(req, res){
+// 	res.send('<h1>Woo, forms rule!</h1>')
+// });
 
 
 http.createServer(app).listen(app.get('port'), function(){
